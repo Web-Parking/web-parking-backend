@@ -2,6 +2,8 @@ package com.projects.api.webparking.entities;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -9,9 +11,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String email;
-    @OneToMany
-    private Occupation[] occupations;
+    private Timestamp createdAt;
     public User() {}
 
+    public User(String email) {
+        this.setEmail(email);
+        Long datetime = System.currentTimeMillis();
+        this.createdAt = new Timestamp(datetime);
+    }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
