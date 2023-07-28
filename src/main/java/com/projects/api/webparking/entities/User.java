@@ -16,8 +16,7 @@ public class User {
 
     public User(String email) {
         this.setEmail(email);
-        Long datetime = System.currentTimeMillis();
-        this.createdAt = new Timestamp(datetime);
+        this.createdAt = new Timestamp(System.currentTimeMillis());
     }
 
 

@@ -2,7 +2,6 @@ package com.projects.api.webparking.controllers;
 
 import com.projects.api.webparking.dtos.CreateOrFindUserDto;
 import com.projects.api.webparking.entities.User;
-import com.projects.api.webparking.repositories.UserRepository;
 import com.projects.api.webparking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
