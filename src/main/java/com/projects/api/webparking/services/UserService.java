@@ -21,18 +21,15 @@ public class UserService {
     private OccupationRepository occupationRepository;
 
     public User findOrCreateUser(CreateOrFindUserDto userDto) {
-        Optional<User> user = userRepository.findByEmail(userDto.getEmail());
-        if(user.isPresent()) {
-            return user.get();
-        }
-        return userRepository.save(new User(userDto.getEmail()));
+        return userRepository.findByEmail(userDto.getEmail()).orElseGet(
+                () -> userRepository.save(new User(userDto.getEmail()))
+        );
     }
 
-    public Occupation createOccupation(String userId) throws EntityNotFoundException {
-        Optional<User> user = userRepository.findById(userId);
-        if(user.isEmpty()) {
-            throw new EntityNotFoundException("Usuário não encontrado");
-        }
-        return occupationRepository.save(new Occupation(user.get()));
+    public Occupation createOccupation(String userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            return new EntityNotFoundException("User not found");
+        });
+        return occupationRepository.save(new Occupation(user));
     }
 }

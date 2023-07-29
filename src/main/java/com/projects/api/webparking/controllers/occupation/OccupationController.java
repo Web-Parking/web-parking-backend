@@ -1,5 +1,6 @@
 package com.projects.api.webparking.controllers.occupation;
 
+import com.projects.api.webparking.controllers.exceptions.StandardError;
 import com.projects.api.webparking.dtos.CreateOrFindUserDto;
 import com.projects.api.webparking.entities.Occupation;
 import com.projects.api.webparking.entities.User;
@@ -25,8 +26,15 @@ public class OccupationController {
 		try {
 			occupation = userService.createOccupation(userId);
 			return ResponseEntity.status(HttpStatus.OK).body(occupation);
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		catch (EntityNotFoundException exception) {
+			StandardError error = new StandardError(
+					HttpStatus.NOT_FOUND.value(),
+					"User not found",
+					exception.getMessage(),
+					"test"
+			);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 		}
 	}
 }
