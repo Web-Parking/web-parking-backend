@@ -14,12 +14,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@RestControllerAdvice
+@ControllerAdvice
 public class ControllerExceptionHandler {
-//	@ExceptionHandler(EntityNotFoundException.class)
-//	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException exception, HttpServletRequest request) {
+	@ExceptionHandler(value = EntityNotFoundException.class)
+	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException exception, HttpServletRequest request) {
+		StandardError error = new StandardError(
+				HttpStatus.NOT_FOUND.value(),
+				"User not found",
+				exception.getMessage(),
+				request.getRequestURI()
+		);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 //		não está funcionando, a requisição
 //		todo corrigir, aula https://www.youtube.com/watch?v=MAv7xgnSD-s
-//	}
+	}
 
 }

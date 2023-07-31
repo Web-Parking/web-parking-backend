@@ -23,18 +23,18 @@ public class OccupationController {
 	@PostMapping
 	public ResponseEntity<Object> getOccupation(@PathVariable("userId") String userId) {
 		Occupation occupation;
-		try {
+//		try {
 			occupation = userService.createOccupation(userId);
 			return ResponseEntity.status(HttpStatus.OK).body(occupation);
-		}
-		catch (EntityNotFoundException exception) {
-			StandardError error = new StandardError(
-					HttpStatus.NOT_FOUND.value(),
-					"User not found",
-					exception.getMessage(),
-					"test"
-			);
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-		}
+//		}
+//		catch (EntityNotFoundException exception) {
+//			StandardError error = new StandardError(
+//					HttpStatus.NOT_FOUND.value(),
+//					"User not found",
+//					exception.getMessage(),
+//					"test"
+//			);
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+//		}
 	}
 }
