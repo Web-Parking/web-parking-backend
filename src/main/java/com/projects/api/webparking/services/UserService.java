@@ -5,7 +5,7 @@ import com.projects.api.webparking.entities.Occupation;
 import com.projects.api.webparking.entities.User;
 import com.projects.api.webparking.repositories.OccupationRepository;
 import com.projects.api.webparking.repositories.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.projects.api.webparking.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
