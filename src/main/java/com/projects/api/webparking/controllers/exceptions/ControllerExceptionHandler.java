@@ -16,7 +16,7 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException exception, HttpServletRequest request) {
 		StandardError error = new StandardError(
 				HttpStatus.NOT_FOUND.value(),
-				"User not found",
+				"Not found",
 				exception.getMessage(),
 				request.getRequestURI()
 		);

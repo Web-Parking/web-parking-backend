@@ -40,6 +40,14 @@ public class Occupation {
         this.code = code;
     }
 
+    public OccupationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OccupationStatus status) {
+        this.status = status;
+    }
+
     public enum OccupationStatus {
         CREATED, RELEASED, FINISHED
     }

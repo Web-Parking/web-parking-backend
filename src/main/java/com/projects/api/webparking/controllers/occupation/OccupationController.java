@@ -1,6 +1,7 @@
 package com.projects.api.webparking.controllers.occupation;
 
 import com.projects.api.webparking.controllers.exceptions.StandardError;
+import com.projects.api.webparking.dtos.CodeOccupationDto;
 import com.projects.api.webparking.dtos.CreateOrFindUserDto;
 import com.projects.api.webparking.entities.Occupation;
 import com.projects.api.webparking.entities.User;
@@ -24,5 +25,11 @@ public class OccupationController {
 	public ResponseEntity<Object> getOccupation(@PathVariable("userId") String userId) {
 		Occupation occupation = userService.createOccupation(userId);
 		return ResponseEntity.status(HttpStatus.OK).body(occupation);
+	}
+
+	@PatchMapping
+	public ResponseEntity<Void> releaseOccupation(@PathVariable("userId") String userId, @RequestBody CodeOccupationDto codeOccupationDto) {
+		userService.releaseOccupation(userId, codeOccupationDto.getCode());
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 }
