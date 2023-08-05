@@ -32,4 +32,10 @@ public class OccupationController {
 		userService.releaseOccupation(userId, codeOccupationDto.getCode());
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
+
+	@GetMapping("show/lastByUser")
+	public ResponseEntity<Occupation> getLastOccupation(@PathVariable("userId") String userId) {
+		Occupation occupation = userService.getLastOccupation(userId);
+		return ResponseEntity.status(HttpStatus.OK).body(occupation);
+	}
 }

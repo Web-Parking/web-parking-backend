@@ -31,9 +31,14 @@ public class UserService {
         return occupationRepository.save(new Occupation(user));
     }
 
+    public Occupation getLastOccupation(String userId) {
+        return occupationRepository.findLastOccupationByUserId(userId).orElseThrow(() -> new EntityNotFoundException("Occupation not found"));
+    }
+
     @Transactional
     public void releaseOccupation(String userId, String codeOccupation) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        //todo add enteredAt no update
         int affectedRows = occupationRepository.updateOccupationSetStatusForCode(Occupation.OccupationStatus.RELEASED, codeOccupation);
         if(affectedRows == 0) {
             throw new EntityNotFoundException("Incorrect Code");

@@ -14,6 +14,31 @@ public class Occupation {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String code;
+
+    public Timestamp getEnteredAt() {
+        return enteredAt;
+    }
+
+    public void setEnteredAt(Timestamp enteredAt) {
+        this.enteredAt = enteredAt;
+    }
+
+    public Timestamp getLeftAt() {
+        return leftAt;
+    }
+
+    public void setLeftAt(Timestamp leftAt) {
+        this.leftAt = leftAt;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
     private Timestamp enteredAt;
     private Timestamp leftAt;
     private OccupationStatus status;
@@ -23,6 +48,8 @@ public class Occupation {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Occupation() {}
     public Occupation(User user) {
         this.user = user;
         UUID uuid = UUID.randomUUID();
@@ -46,6 +73,14 @@ public class Occupation {
 
     public void setStatus(OccupationStatus status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public enum OccupationStatus {
