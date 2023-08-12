@@ -3,6 +3,7 @@ package com.projects.api.webparking.controllers.occupation;
 import com.projects.api.webparking.controllers.exceptions.StandardError;
 import com.projects.api.webparking.dtos.CodeOccupationDto;
 import com.projects.api.webparking.dtos.CreateOrFindUserDto;
+import com.projects.api.webparking.dtos.QrCodeDto;
 import com.projects.api.webparking.entities.Occupation;
 import com.projects.api.webparking.entities.User;
 import com.projects.api.webparking.services.UserService;
@@ -37,5 +38,11 @@ public class OccupationController {
 	public ResponseEntity<Occupation> getLastOccupation(@PathVariable("userId") String userId) {
 		Occupation occupation = userService.getLastOccupation(userId);
 		return ResponseEntity.status(HttpStatus.OK).body(occupation);
+	}
+
+	@PostMapping("generateQrCode")
+	public ResponseEntity<QrCodeDto> generateQrCode() {
+		QrCodeDto qrCode = userService.generateQrCode();
+		return ResponseEntity.status(HttpStatus.OK).body(qrCode);
 	}
 }
